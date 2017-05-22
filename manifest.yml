@@ -1,0 +1,4 @@
+---
+applications:
+- name: Films
+  command: node app/server.js

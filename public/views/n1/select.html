@@ -1,0 +1,97 @@
+<div class="row">
+	<div class="col-md-12">
+	
+		<table id="caption" class="table">
+			<tr>
+				<td class="text-left">
+				</td>
+				<td class="text-center">
+					<h3 translate="label.class.select.n1"></h3>
+				</td>
+				<td class="text-right">
+				  <a class="iconBig" href ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></a>
+				</td>
+			</tr>
+		</table>
+
+		<div class="upperTableZone row">
+			<search-tool class="col-md-12"
+						 ng-model="searchContext"
+						 search="refresh">
+			</search-tool>
+		</div>
+
+		<table id="itemList" class="table data-table table-hover table-striped table-condensed" ng-show="dataReceived">
+			<thead>
+				<th>
+				</th>				
+				<th ng-click="sortBy('score_phrase')">Score_phrase<sort-column ng-model="searchContext.sort.score_phrase"></sort-column></th>
+				<th ng-click="sortBy('title')">Title<sort-column ng-model="searchContext.sort.title"></sort-column></th>
+				<th ng-click="sortBy('url')">Url<sort-column ng-model="searchContext.sort.url"></sort-column></th>
+				<th ng-click="sortBy('platform')">Platform<sort-column ng-model="searchContext.sort.platform"></sort-column></th>
+				<th ng-click="sortBy('score')">Score<sort-column ng-model="searchContext.sort.score"></sort-column></th>
+				<th ng-click="sortBy('genre')">Genre<sort-column ng-model="searchContext.sort.genre"></sort-column></th>
+				<th ng-click="sortBy('editors_choice')">Editors_choice<sort-column ng-model="searchContext.sort.editors_choice"></sort-column></th>
+				<th ng-click="sortBy('release_year')">Release_year<sort-column ng-model="searchContext.sort.release_year"></sort-column></th>
+				<th ng-click="sortBy('release_month')">Release_month<sort-column ng-model="searchContext.sort.release_month"></sort-column></th>
+				<th ng-click="sortBy('release_day')">Release_day<sort-column ng-model="searchContext.sort.release_day"></sort-column></th>
+				
+				<th></th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="n1 in dataList">
+					<td>
+						<a href ng-click="select(n1, $event)">
+							<span class="glyphicon glyphicon-search" tooltip="Select">
+						</a>
+					</td>
+					<td class="data">{{n1.score_phrase}}</td>
+					<td class="data">{{n1.title}}</td>
+					<td class="data">{{n1.url}}</td>
+					<td class="data">{{n1.platform}}</td>
+					<td class="data">{{n1.score}}</td>
+					<td class="data">{{n1.genre}}</td>
+					<td class="data">{{n1.editors_choice}}</td>
+					<td class="data">{{n1.release_year}}</td>
+					<td class="data">{{n1.release_month}}</td>
+					<td class="data">{{n1.release_day}}</td>
+					<td>
+						<a href ng-click="select(n1, $event)">
+							<span class="glyphicon glyphicon-search" tooltip="Select">
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>			
+		
+		<div ng-show="dataReceived" class="text-center">
+			<div>
+				<pagination max-size="5" 
+							boundary-links="true" 
+				            total-items="searchContext.totalItems" 
+				            items-per-page="searchContext.pageSize" 
+				            ng-model="searchContext.currentPage" 
+							ng-change="loadCurrentPage()"
+							previous-text="&lsaquo;" 
+							next-text="&rsaquo;" 
+							first-text="&laquo;" 
+							last-text="&raquo;">
+				</pagination>
+			</div>
+		</div>			
+		<div ng-show="!dataReceived" class="loader">
+			<img src="images/loader.gif" alt="Loading..." />
+		</div>
+		<div class="row acc-buttons">
+			<div class="form-group">
+				<div>
+					<button class="btn" ng-click="select()">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+						<span translate="cmd.cancel"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+</div>
